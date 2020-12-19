@@ -10,4 +10,6 @@ def main():
     print("*******************t101:")
 
 if __name__ == "__main__":
+    a = 10
+    printf()
     main()
