@@ -2,28 +2,62 @@
 # -*- coding:utf-8 -*-
 
 import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QHBoxLayout, QVBoxLayout, QMainWindow, QPushButton
 
 
-class MainWindow(QWidget):
+class CTopWidget(QWidget):
+    pass
+
+
+class CLeftWidget(QWidget):
     def __init__(self):
-        super(MainWindow, self).__init__()
-        label1 = QLabel('邮箱账号')
-        label2 = QLabel("邮件列表")
-        label3 = QLabel("邮件详情")
+        super(CLeftWidget, self).__init__()
+        layout = QVBoxLayout()
 
-        layout1 = QVBoxLayout()
-
-        layout = QHBoxLayout()
-        layout.addWidget(label1)
-        layout.addWidget(label2)
-        layout.addWidget(label3)
-
+        btn1 = QPushButton("111")
+        btn2 = QPushButton("112")
+        layout.addWidget(btn1)
+        layout.addWidget(btn2)
         self.setLayout(layout)
+
+
+class CMiddleWidget(QWidget):
+    def __init__(self):
+        super(CMiddleWidget, self).__init__()
+        layout = QVBoxLayout()
+        mail1 = QLabel('111')
+        mail2 = QLabel('112')
+        layout.addWidget(mail1)
+        layout.addWidget(mail2)
+        self.setLayout(layout)
+
+
+class CRightWidget(QWidget):
+    pass
+
+
+class CContenWidget(QWidget):
+    def __init__(self):
+        super(CContenWidget, self).__init__()
+        layout = QHBoxLayout()
+        layout.addWidget(CLeftWidget())
+        layout.addWidget(CMiddleWidget())
+        layout.addWidget(CRightWidget())
+        self.setLayout(layout)
+
+
+class CMainAppWindow(QMainWindow):
+    def __init__(self):
+        super(CMainAppWindow, self).__init__()
+
+        main_frame = CContenWidget()
+        self.setCentralWidget(main_frame)
+
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    mainwindow = MainWindow()
+    mainwindow = CMainAppWindow()
+    # mainwindow = CLeftWidget()
     mainwindow.show()
     sys.exit(app.exec_())
