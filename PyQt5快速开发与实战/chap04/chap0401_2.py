@@ -9,6 +9,7 @@
 import sys
 
 from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtGui import QIcon
 
 
 ################################################################################
@@ -24,6 +25,7 @@ class MainWindow(QMainWindow):
 ################################################################################
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("./images/cartoon1.ico"))
     form = MainWindow()
     form.show()
     sys.exit(app.exec_())
