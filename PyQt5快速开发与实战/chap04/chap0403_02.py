@@ -26,6 +26,8 @@ class WinForm(QMainWindow):
         self.setCentralWidget(main_frame)
 
     def onButtonClick(self):
+        sender = self.sender()
+        print(sender.text() + ' 被按下了')
         qApp = QApplication.instance()
         qApp.quit()
 
