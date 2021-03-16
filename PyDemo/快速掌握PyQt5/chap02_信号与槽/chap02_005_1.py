@@ -7,14 +7,27 @@
 #
 ################################################################################
 import sys
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 
 
 ################################################################################
 class Demo(QWidget):
+    my_signal = pyqtSignal()
+
     def __init__(self):
         super(Demo, self).__init__()
         self.label = QLabel('Hello World', self)
+        self.my_signal.connect(self.change_text)
+
+    def change_text(self):
+        if self.label.text() == 'Hello World':
+            self.label.setText('Hello PyQt5')
+        else:
+            self.label.setText('Hello World')
+
+    def mousePressEvent(self, QMouseEvent):
+        self.my_signal.emit()
 
 
 ################################################################################
