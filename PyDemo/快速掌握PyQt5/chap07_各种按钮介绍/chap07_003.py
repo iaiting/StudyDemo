@@ -37,9 +37,9 @@ class Demo(QWidget):
         self.all_v_layout.addLayout(self.pic_h_layout)
         self.all_v_layout.addLayout(self.button_h_layout)
 
-        self.pic_h_layout.addStretch(1)
+        self.pic_h_layout.addStretch(2)
         self.pic_h_layout.addWidget(self.pic_label)
-        self.pic_h_layout.addStretch(1)
+        self.pic_h_layout.addStretch(2)
 
         self.button_h_layout.addWidget(self.off_button)
         self.button_h_layout.addWidget(self.on_button)
