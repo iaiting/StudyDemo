@@ -38,8 +38,8 @@ class Demo(QWidget):
 
         self.layout_init()
         self.pushbutton_init()
+        self.lineedit_init()
         self.signin_page = SigninPage()
-
 
     def layout_init(self):
         self.grid_layout.addWidget(self.user_label, 0, 0, 1, 1)
@@ -56,6 +56,14 @@ class Demo(QWidget):
 
         self.setLayout(self.v_layout)
 
+    def lineedit_init(self):
+        self.user_line.setPlaceholderText('Please enter your username')
+        self.pwd_line.setPlaceholderText('Please enter your password')
+        self.pwd_line.setEchoMode(QLineEdit.Password)
+
+        self.user_line.textChanged.connect(self.check_input_func)
+        self.pwd_line.textChanged.connect(self.check_input_func)
+
     def pushbutton_init(self):
         self.login_button.setEnabled(False)
         self.login_button.clicked.connect(self.check_login_func)
@@ -71,6 +79,13 @@ class Demo(QWidget):
 
     def show_signin_page_func(self):
         self.signin_page.exec_()
+
+    def check_input_func(self):
+        if self.user_line.text() and self.pwd_line.text():
+            self.login_button.setEnabled(True)
+        else:
+            self.login_button.setEnabled(False)
+
 
 
 ################################################################################
@@ -132,7 +147,14 @@ class SigninPage(QDialog):
         self.signin_button.clicked.connect(self.check_sign_func)
 
     def check_sign_func(self):
-        QMessageBox.information(self, 'Information', 'Register Successfully')
+        if self.signin_pwd_line.text() != self.signin_pwd2_line.text():
+            QMessageBox.critical(self, 'Wrong', 'Two Passwords Typed Are Not Same!')
+        elif self.signin_user_line.text() not in USER_PWD:
+            USER_PWD[self.signin_user_line.text()] = self.signin_pwd_line.text()
+            QMessageBox.information(self, 'Information', 'Register Successfully')
+            self.close()
+        else:
+            QMessageBox.critical(self, 'Wrong', 'This Username Has Been Registered!')
 
 
 ################################################################################
