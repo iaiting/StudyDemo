@@ -39,7 +39,6 @@ class Demo(QWidget):
         self.setLayout(self.v_layout)
 
 
-
     def combobox_init(self):
         self.combobox_1.addItem(self.choice)
         self.combobox_1.addItems(self.choice_list)
