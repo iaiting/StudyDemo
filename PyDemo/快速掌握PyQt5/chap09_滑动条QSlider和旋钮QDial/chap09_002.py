@@ -22,8 +22,8 @@ class Demo(QWidget):
         self.setWindowTitle('QDial')
 
         self.dial = QDial(self)
-        self.dial.setFixedSize(100, 100)
-        self.dial.setRange(0, 100)
+        self.dial.setFixedSize(200, 200)
+        self.dial.setRange(0, 120)
         self.dial.setNotchesVisible(True)
         self.dial.valueChanged.connect(self.on_change_func)
 
@@ -34,7 +34,6 @@ class Demo(QWidget):
         self.h_layout.addWidget(self.dial)
         self.h_layout.addWidget(self.label)
         self.setLayout(self.h_layout)
-
 
     def on_change_func(self):
         self.label.setText(str(self.dial.value()))
