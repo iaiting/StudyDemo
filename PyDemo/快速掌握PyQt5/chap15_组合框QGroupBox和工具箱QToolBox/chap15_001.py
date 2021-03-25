@@ -33,6 +33,8 @@ class Demo(QWidget):
         self.green = QRadioButton('Green', self)
         self.yellow = QRadioButton('Yellow', self)
 
+        self.color_list = [self.red, self.blue, self.green, self.yellow]
+
         self.pic_label = QLabel(self)
 
         self.h1_layout = QHBoxLayout()
@@ -66,6 +68,9 @@ class Demo(QWidget):
 
     def radiobutton_init(self):
         self.yellow.setChecked(True)
+        for btn in self.color_list:
+            btn.clicked.connect(self.change_color_func)
+
         self.off.setChecked(True)
         self.off.toggled.connect(self.on_and_off_func)
 
