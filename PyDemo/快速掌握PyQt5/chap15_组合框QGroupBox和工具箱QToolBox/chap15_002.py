@@ -37,6 +37,8 @@ class Demo(QToolBox):
         self.addItem(self.groupbox_1, 'Couple One')
         self.addItem(self.groupbox_2, 'Couple Two')
         self.addItem(self.groupbox_3, 'Couple Three')
+        self.currentChanged.connect(self.print_index_func)
+
 
         self.layout_init()
         self.group_int()
@@ -69,6 +71,14 @@ class Demo(QToolBox):
         self.toolbtn_m2.setIcon(QIcon('images/m2.ico'))
         self.toolbtn_m3.setIcon(QIcon('images/m3.ico'))
 
+    def print_index_func(self):
+        couple_dict = {
+            0: 'Couple One',
+            1: 'Couple Two',
+            2: 'Couple Three'
+        }
+        sentence = 'You are looking at {}.'.format(couple_dict.get(self.currentIndex()))
+        print(sentence)
 
 ################################################################################
 if __name__ == '__main__':
