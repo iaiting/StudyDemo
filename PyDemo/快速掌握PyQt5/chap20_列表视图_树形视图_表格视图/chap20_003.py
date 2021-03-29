@@ -45,6 +45,7 @@ class Demo(QWidget):
         self.info_label = QLabel(self)
         self.info_label.setAlignment(Qt.AlignCenter)
 
+
         self.v_layout = QVBoxLayout()
         self.v_layout.addWidget(self.table)
         self.v_layout.addWidget(self.info_label)
