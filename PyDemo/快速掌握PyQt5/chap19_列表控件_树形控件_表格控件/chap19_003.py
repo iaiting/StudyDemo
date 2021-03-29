@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import (
     QApplication, QWidget, QTableWidget, QTableWidgetItem
 )
 
+
 ################################################################################
 class Demo(QTableWidget):
     def __init__(self):
