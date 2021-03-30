@@ -10,6 +10,7 @@ import sys
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QPushButton,
     QGridLayout, QLineEdit, QTextEdit,
+    QInputDialog,
 )
 
 
@@ -60,18 +61,33 @@ class Demo(QWidget):
     def open_dialog_func(self, btn):
         if btn == self.name_btn:
             print("self.name_btn")
+            name, ok = QInputDialog.getText(self, 'Name Input', 'Please enter the name:')
+            if ok:
+                self.name_line.setText(name)
 
         elif btn == self.gender_btn:
             print("self.gender_btn")
+            gender_list = ['Famale', 'Male']
+            gender, ok = QInputDialog.getItem(self, 'Gender Input', 'Please choose the gender:', gender_list, 0, False)
+            if ok:
+                self.gender_line.setText(gender)
 
         elif btn == self.age_btn:
             print("self.age_btn")
+            age, ok = QInputDialog.getInt(self, 'Age Input', 'Please select the age:')
+            if ok:
+                self.age_line.setText(str(age))
 
         elif btn == self.score_btn:
             print("self.score_btn")
-
+            score, ok = QInputDialog.getDouble(self, 'Score Input', 'Please select the score:')
+            if ok:
+                self.score_line.setText(str(score))
         else:
             print("other ")
+            info, ok  = QInputDialog.getMultiLineText(self, 'Info Input', 'Please enter the info:')
+            if ok:
+                self.info_textedit.setText(info)
 
 
 ################################################################################
