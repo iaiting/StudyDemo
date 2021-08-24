@@ -7,7 +7,9 @@
 #
 ###############################################################################
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication, QAction
+from PyQt5.QtWidgets import (
+    QMainWindow, QApplication, QAction, QTextEdit,
+)
 
 
 ###############################################################################
@@ -29,6 +31,28 @@ class Demo(QMainWindow):
         self.status_bar = self.statusBar()
 
         self.new_action = QAction('New', self)
+        self.open_action = QAction('Open', self)
+
+        self.text_edit = QTextEdit(self)
+
+        self.setCentralWidget(self.text_edit)
+        self.resize(450, 600)
+
+        self.menu_init()
+        self.toolbar_init()
+        self.status_bar_init()
+
+    def menu_init(self):
+        self.file_menu.addAction(self.new_action)
+        self.file_menu.addAction(self.open_action)
+
+    def toolbar_init(self):
+        self.file_toolbar.addAction(self.new_action)
+        self.file_toolbar.addAction(self.open_action)
+
+    def status_bar_init(self):
+        self.status_bar.showMessage('Ready to compose')
+        pass
 
 
 #############################################################################
