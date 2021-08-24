@@ -11,6 +11,7 @@ import sys
 
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
+
 ###############################################################################
 class Demo(QMainWindow):
 
@@ -18,6 +19,7 @@ class Demo(QMainWindow):
         super(Demo, self).__init__()
 
 
+###############################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     demo = Demo()
