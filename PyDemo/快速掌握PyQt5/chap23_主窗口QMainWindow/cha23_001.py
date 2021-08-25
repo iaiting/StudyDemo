@@ -7,11 +7,13 @@
 #
 ###############################################################################
 import sys
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import QMimeData
+import time
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtCore import QMimeData, Qt
 from PyQt5.QtWidgets import (
     QMainWindow, QApplication, QAction, QTextEdit,
     QMessageBox, QFontDialog, QColorDialog,
+    QSplashScreen,
 )
 
 
@@ -173,6 +175,16 @@ class Demo(QMainWindow):
 #############################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    splash = QSplashScreen()
+    splash.setPixmap(QPixmap('../images/splash.jpg'))
+    splash.show()
+    splash.showMessage('Welcome to Use This PyQt5-Made Notebook~',
+                       Qt.AlignBottom | Qt.AlignCenter, Qt.white)
+
+    time.sleep(1)
     demo = Demo()
     demo.show()
+    splash.finish(demo)
+
     sys.exit(app.exec_())
