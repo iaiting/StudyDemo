@@ -52,10 +52,10 @@ class Demo(QWidget):
         if listwidget == self.listwidget_1:
             item = QListWidgetItem(self.listwidget_1.currentItem())
             self.listwidget_2.addItem(item)
-            print("listwidget_1")
+            print(self.listwidget_2.count())
         else:
             self.listwidget_2.takeItem(self.listwidget_2.currentRow())
-            print("listwidget_2")
+            print(self.listwidget_2.count())
 
 
 ################################################################################
