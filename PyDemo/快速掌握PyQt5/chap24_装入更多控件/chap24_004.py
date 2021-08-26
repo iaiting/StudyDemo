@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
     QTextEdit
 )
 
+
 class Demo(QMainWindow):
     def __init__(self):
         super(Demo, self).__init__()
@@ -20,13 +21,9 @@ class Demo(QMainWindow):
         self.dock2.setAllowedAreas(Qt.RightDockWidgetArea | Qt.TopDockWidgetArea)
         self.dock3.setAllowedAreas(Qt.NoDockWidgetArea)
 
-
         self.dock1.setFeatures(QDockWidget.DockWidgetMovable | QDockWidget.DockWidgetFloatable)
         self.dock2.setFeatures(QDockWidget.DockWidgetMovable | QDockWidget.DockWidgetClosable)
         self.dock3.setFeatures(QDockWidget.DockWidgetClosable)
-
-
-
 
         self.text1 = QTextEdit()
         self.text2 = QTextEdit()
@@ -40,12 +37,8 @@ class Demo(QMainWindow):
         self.addDockWidget(Qt.RightDockWidgetArea, self.dock2)
         self.addDockWidget(Qt.RightDockWidgetArea, self.dock3)
 
-
         self.center_text = QTextEdit()
         self.setCentralWidget(self.center_text)
-
-
-
 
 
 if __name__ == "__main__":
