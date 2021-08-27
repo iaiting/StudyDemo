@@ -24,7 +24,7 @@ class Demo(QWidget):
         self.listwidget_1 = QListWidget(self)
         self.listwidget_2 = QListWidget(self)
 
-        self.listwidget_1.doubleClicked.connect(lambda : self.change_func(self.listwidget_1))
+        self.listwidget_1.doubleClicked.connect(lambda: self.change_func(self.listwidget_1))
         self.listwidget_2.doubleClicked.connect(lambda: self.change_func(self.listwidget_2))
 
         for i in range(6):

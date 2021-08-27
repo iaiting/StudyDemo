@@ -53,7 +53,7 @@ class Demo(QWidget):
             self.listwidget_2.addItem(item)
         else:
             self.listwidget_2.takeItem(self.listwidget_2.currentRow())
-            pass
+            
 
 ################################################################################
 if __name__ == '__main__':
