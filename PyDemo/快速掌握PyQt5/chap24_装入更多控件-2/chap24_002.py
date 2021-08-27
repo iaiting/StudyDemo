@@ -29,6 +29,7 @@ class Demo(QTabWidget):
         self.addTab(self.tab3, QIcon('../images/close.ico'), '333')
 
         self.tab1_init()
+        self.tab2_init()
 
     def tab1_init(self):
         name_label = QLabel('Name:', self.tab1)
@@ -55,7 +56,26 @@ class Demo(QTabWidget):
         g_layout.addWidget(bd_dateedit, 2, 1, 1, 1)
 
     def tab2_init(self):
-        pass
+        tel_label = QLabel('Tel:', self.tab2)
+        tel_line = QLineEdit(self.tab2)
+
+        mobile_label = QLabel('Mobile:', self.tab2)
+        mobile_line = QLineEdit(self.tab2)
+
+        add_label = QLabel('Address:', self.tab2)
+        add_line = QLineEdit(self.tab2)
+
+        g_layout = QGridLayout()
+        self.tab2.setLayout(g_layout)
+
+        g_layout.addWidget(tel_label, 0, 0, 1, 1)
+        g_layout.addWidget(tel_line, 0, 1, 1, 1)
+
+        g_layout.addWidget(mobile_label, 1, 0, 1, 1)
+        g_layout.addWidget(mobile_line, 1, 1, 1, 1)
+
+        g_layout.addWidget(add_label, 2, 0, 1, 1)
+        g_layout.addWidget(add_line, 2, 1, 1, 1)
 
 
 ################################################################################
