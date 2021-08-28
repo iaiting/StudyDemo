@@ -14,6 +14,7 @@ from PyQt5.QtWidgets import (
     QLabel, QLineEdit
 )
 
+
 ################################################################################
 class Demo(QWidget):
     def __init__(self):

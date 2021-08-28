@@ -28,6 +28,7 @@ class Demo(QWidget):
         self.h_layout.addWidget(self.user_label)
         self.h_layout.addWidget(self.user_line)
 
+
 ################################################################################
 if __name__ == '__main__':
     app = QApplication(sys.argv)

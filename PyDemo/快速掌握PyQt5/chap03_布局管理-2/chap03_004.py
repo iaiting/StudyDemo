@@ -3,15 +3,15 @@
 
 ################################################################################
 #
-# 3.3 混合使用QVBoxLayout和QHBoxLayout, 第二种方法
+# 3.4 表单布局QFormLayout
 #
 ################################################################################
 import sys
 
 from PyQt5.QtWidgets import (
-    QApplication, QPushButton, QWidget,
-    QVBoxLayout, QHBoxLayout,
-    QLabel, QLineEdit
+    QApplication, QHBoxLayout, QWidget, QFormLayout, 
+    QLabel, QLineEdit,
+    QVBoxLayout, QPushButton,
 )
 
 
@@ -23,27 +23,24 @@ class Demo(QWidget):
         self.all_v_layout = QVBoxLayout()
         self.setLayout(self.all_v_layout)
 
-        self.user_h_layout = QHBoxLayout()
-        self.pwd_h_layout = QHBoxLayout()
+        self.f_layout = QFormLayout()
         self.button_h_layout = QHBoxLayout()
-        self.all_v_layout.addLayout(self.user_h_layout)
-        self.all_v_layout.addLayout(self.pwd_h_layout)
+        self.all_v_layout.addLayout(self.f_layout)
         self.all_v_layout.addLayout(self.button_h_layout)
 
         self.user_label = QLabel('Username:', self)
         self.user_line = QLineEdit(self)
-        self.user_h_layout.addWidget(self.user_label)
-        self.user_h_layout.addWidget(self.user_line)
+        self.f_layout.addRow(self.user_label, self.user_line)
 
-        self.pwd_label = QLabel('Password:', self)
+        self.pwd_label = QLabel('Passwd:', self)
         self.pwd_line = QLineEdit(self)
-        self.pwd_h_layout.addWidget(self.pwd_label)
-        self.pwd_h_layout.addWidget(self.pwd_line)
+        self.f_layout.addRow(self.pwd_label, self.pwd_line)
 
-        self.login_button = QPushButton('Log in', self)
-        self.signin_button = QPushButton('Sign in', self)
-        self.button_h_layout.addWidget(self.login_button)
-        self.button_h_layout.addWidget(self.signin_button)
+        self.login_btn = QPushButton('Log in', self)
+        self.sign_btn = QPushButton('Sign in', self)
+        self.button_h_layout.addWidget(self.login_btn)
+        self.button_h_layout.addWidget(self.sign_btn)
+
 
 ################################################################################
 if __name__ == '__main__':
