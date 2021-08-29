@@ -6,50 +6,50 @@
 # 8.1 QComboBox
 #
 ################################################################################
-
 import sys
-from PyQt5.QtWidgets import (
-    QApplication, QWidget, QComboBox, QFontComboBox, QLineEdit,
-    QVBoxLayout, QMessageBox,
+
+from  PyQt5.QtWidgets import (
+    QApplication, QComboBox, QFontComboBox, QLineEdit, QMessageBox, QWidget,
+    QComboBox,
+    QVBoxLayout,
 )
+from PyQt5.QtGui import QFont
 
 
 ################################################################################
 class Demo(QWidget):
     choice = 'a'
-    choice_list = ['b', 'c', 'd', 'e']
+    choice_list = ['b', 'c', 'd']
 
     def __init__(self):
-        super(Demo, self).__init__()
-        self.combobox_1 = QComboBox(self)
-        self.combobox_2 = QFontComboBox(self)
+        super().__init__()
+        self.combobox_1 = QComboBox()
+        self.combobox_2 = QFontComboBox()
+        self.lineedit = QLineEdit()
 
-        self.lineedit = QLineEdit(self)
-        self.v_layout = QVBoxLayout()
-
+        self.layout = QVBoxLayout()
         self.layout_init()
-
         self.combobox_init()
 
     def layout_init(self):
-        self.v_layout.addWidget(self.combobox_1)
-        self.v_layout.addWidget(self.combobox_2)
-        self.v_layout.addWidget(self.lineedit)
-
-        self.setLayout(self.v_layout)
+        self.layout.addWidget(self.combobox_1)
+        self.layout.addWidget(self.combobox_2)
+        self.layout.addWidget(self.lineedit)
+        self.setLayout(self.layout)
 
     def combobox_init(self):
         self.combobox_1.addItem(self.choice)
         self.combobox_1.addItems(self.choice_list)
-        self.combobox_1.currentIndexChanged.connect(lambda: self.on_combobox_func(self.combobox_1))
 
+        self.combobox_1.currentIndexChanged.connect(lambda: self.on_combobox_func(self.combobox_1))
         self.combobox_2.currentFontChanged.connect(lambda: self.on_combobox_func(self.combobox_2))
 
     def on_combobox_func(self, combobox):
-        if combobox == self.combobox_1:
+        if self.combobox_1 == combobox:
             QMessageBox.information(self, 'ComboBox 1', '{}: {}'.format(combobox.currentIndex(), combobox.currentText()))
         else:
-            self.lineedit.setFont(combobox.currentFont())
+            font_text = combobox.currentFont()
+            self.lineedit.setFont(QFont(font_text))
 
 
 ################################################################################

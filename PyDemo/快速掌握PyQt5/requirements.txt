@@ -1,2 +1,3 @@
 -i https://pypi.douban.com/simple
 pyqt5
+PyQt5-stubs
