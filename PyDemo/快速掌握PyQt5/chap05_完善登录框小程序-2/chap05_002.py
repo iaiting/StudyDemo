@@ -30,20 +30,16 @@ class Demo(QWidget):
 
         self.user_label = QLabel('Username:', self)
         self.user_line = QLineEdit(self)
-        self.user_line.setPlaceholderText('Please enter your name')
-        self.user_line.textChanged.connect(self.check_input_func)
 
         self.pwd_label = QLabel('Password:', self)
         self.pwd_line = QLineEdit(self)
-        self.pwd_line.setPlaceholderText('Please enter your password')
-        self.pwd_line.textChanged.connect(self.check_input_func)
 
         self.login_button = QPushButton("Log in", self)
-        self.login_button.clicked.connect(self.check_login_func)
         self.signin_button = QPushButton("Sign in", self)
 
         self.layout_init()
         self.pushbutton_init()
+        self.line_init()
 
     def layout_init(self):
         self.v_layout.addLayout(self.grid_layout)
@@ -59,8 +55,17 @@ class Demo(QWidget):
         self.h_layout.addWidget(self.signin_button)
 
 
+    def line_init(self):
+        self.user_line.setPlaceholderText('Please enter your name')
+        self.user_line.textChanged.connect(self.check_input_func)
+
+        self.pwd_line.setPlaceholderText('Please enter your password')
+        self.pwd_line.textChanged.connect(self.check_input_func)
+
+
     def pushbutton_init(self):
         self.login_button.setEnabled(False)
+        self.login_button.clicked.connect(self.check_login_func)
 
     def check_input_func(self):
         print("check_input_func")
