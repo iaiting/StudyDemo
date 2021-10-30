@@ -34,10 +34,10 @@ class Demo(QWidget):
         self.v_layout.addLayout(self.h_layout)
         self.setLayout(self.v_layout)
 
-        self.grid_layout.addWidget(self.user_label, 0, 0, 1, 1)
-        self.grid_layout.addWidget(self.user_line, 0, 1, 1, 1)
-        self.grid_layout.addWidget(self.pwd_label, 1, 0, 1, 1)
-        self.grid_layout.addWidget(self.pwd_line, 1, 1, 1, 1)
+        self.grid_layout.addWidget(self.user_label, 0, 0, 2, 1)
+        self.grid_layout.addWidget(self.user_line, 0, 1, 2, 1)
+        self.grid_layout.addWidget(self.pwd_label, 1, 0, 2, 1)
+        self.grid_layout.addWidget(self.pwd_line, 1, 1, 2, 1)
 
         self.h_layout.addWidget(self.login_button)
         self.h_layout.addWidget(self.signin_button)
