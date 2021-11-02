@@ -8,7 +8,7 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QWidget,
+    QApplication, QPushButton, QWidget,
     QLabel, QLineEdit,
     QHBoxLayout, QVBoxLayout, QGridLayout
 )
@@ -24,6 +24,9 @@ class Demo(QWidget):
         self.pwd_label = QLabel('Password:', self)
         self.pwd_line = QLineEdit(self)
 
+        self.login_button = QPushButton('Log in', self)
+        self.signin_button = QPushButton('Sign in', self)
+
         self.all_v_layout = QVBoxLayout()
         self.grid_layout = QGridLayout()
         self.h_layout = QHBoxLayout()
@@ -36,7 +39,11 @@ class Demo(QWidget):
         self.grid_layout.addWidget(self.pwd_label, 1, 0)
         self.grid_layout.addWidget(self.pwd_line, 1, 1)
 
+        self.h_layout.addWidget(self.login_button)
+        self.h_layout.addWidget(self.signin_button)
+
         self.all_v_layout.addLayout(self.grid_layout)
+        self.all_v_layout.addLayout(self.h_layout)
         self.setLayout(self.all_v_layout)
 
 ################################################################################
