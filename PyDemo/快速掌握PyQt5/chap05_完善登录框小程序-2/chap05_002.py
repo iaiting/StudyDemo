@@ -13,7 +13,6 @@ from PyQt5.QtWidgets import (
     QLabel, QPushButton, QMessageBox
 )
 
-
 USER_PWD = {
     'user': 'password'
 }
@@ -53,7 +52,6 @@ class Demo(QWidget):
 
         self.h_layout.addWidget(self.login_button)
         self.h_layout.addWidget(self.signin_button)
-
 
     def line_init(self):
         self.user_line.setPlaceholderText('Please enter your name')
