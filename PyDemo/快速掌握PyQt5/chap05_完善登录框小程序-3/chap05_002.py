@@ -8,10 +8,14 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QPushButton, QWidget,
+    QApplication, QMessageBox, QPushButton, QWidget,
     QLabel, QLineEdit,
     QHBoxLayout, QVBoxLayout, QGridLayout
 )
+
+USER_PWD = {
+    'user': 'password'
+}
 
 ################################################################################
 class Demo(QWidget):
@@ -32,6 +36,8 @@ class Demo(QWidget):
         self.h_layout = QHBoxLayout()
 
         self.layout_init()
+        self.lineedit_init()
+        self.pushbutton_init()
 
     def layout_init(self):
         self.grid_layout.addWidget(self.user_label, 0, 0)
@@ -45,6 +51,31 @@ class Demo(QWidget):
         self.all_v_layout.addLayout(self.grid_layout)
         self.all_v_layout.addLayout(self.h_layout)
         self.setLayout(self.all_v_layout)
+
+    def lineedit_init(self):
+        self.user_line.setPlaceholderText('Please enter your username')
+        self.pwd_line.setPlaceholderText('Please enter your password')
+        self.user_line.textChanged.connect(self.check_input_func)
+        self.pwd_line.textChanged.connect(self.check_input_func)
+
+    def check_input_func(self):
+        if self.user_line.text() and self.pwd_line.text():
+            self.login_button.setEnabled(True)
+        else:
+            self.login_button.setEnabled(False)
+
+    def pushbutton_init(self):
+        self.login_button.setEnabled(False)
+        self.login_button.clicked.connect(self.check_login_func)
+
+    def check_login_func(self):
+        if USER_PWD.get(self.user_line.text()) == self.pwd_line.text():
+            QMessageBox.information(self, 'Information', 'Log in Successfully!')
+        else:
+            QMessageBox.critical(self, 'Wrong', 'Wrong Username or Password')
+
+        self.user_line.clear()
+        self.pwd_line.clear()
 
 ################################################################################
 if __name__ == "__main__":
