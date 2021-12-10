@@ -14,6 +14,6 @@ from PyQt5.QtWidgets import (
 ################################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    label = QLabel('<h1>Hello World</h1>')
+    label = QLabel('<font color="red">Hello</font> <h1>World</h1>')
     label.show()
     sys.exit(app.exec_())
