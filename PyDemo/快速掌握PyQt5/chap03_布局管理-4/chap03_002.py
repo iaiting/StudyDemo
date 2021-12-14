@@ -3,25 +3,25 @@
 
 ################################################################################
 #
-# 3.1 垂直布局QVBoxLayout
+# 3.2 水平布局QHBoxLayout
 #
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QLabel, QVBoxLayout, QWidget
+    QApplication, QHBoxLayout, QLabel, QLineEdit, QWidget
 )
 
 ################################################################################
 class Demo(QWidget):
     def __init__(self):
         super().__init__()
-        self.user_label = QLabel('Username:', self)
-        self.pwd_label = QLabel('Password:', self)
+        self.user_label = QLabel('Username', self)
+        self.user_line = QLineEdit()
 
-        self.v_layout = QVBoxLayout()
-        self.setLayout(self.v_layout)
-        self.v_layout.addWidget(self.user_label)
-        self.v_layout.addWidget(self.pwd_label)
+        self.h_layout = QHBoxLayout()
+        self.h_layout.addWidget(self.user_label)
+        self.h_layout.addWidget(self.user_line)
+        self.setLayout(self.h_layout)
 
 ################################################################################
 if __name__ == "__main__":
