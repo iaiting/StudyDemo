@@ -8,8 +8,12 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
+    QApplication, QGridLayout, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QVBoxLayout, QWidget
 )
+
+USER_PWD = {
+    'user': 'password'
+}
 
 ################################################################################
 class Demo(QWidget):
@@ -61,6 +65,13 @@ class Demo(QWidget):
 
     def pushbutton_init(self):
         self.login_button.setEnabled(False)
+        self.login_button.clicked.connect(self.check_login_fucn)
+
+    def check_login_fucn(self):
+        if USER_PWD.get(self.user_line.text()) == self.pwd_line.text():
+            QMessageBox.information(self, 'Information', 'Log in Successfully!')
+        else:
+            QMessageBox.critical(self, 'Wrong', 'Wrong Username or Password')
 
 
 ################################################################################
