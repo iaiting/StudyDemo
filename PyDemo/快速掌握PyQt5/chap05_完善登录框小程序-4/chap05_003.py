@@ -8,9 +8,12 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QDialog, QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
+    QApplication, QDialog, QHBoxLayout, QLabel, QLineEdit, QMessageBox, QPushButton, QVBoxLayout, QWidget
 )
 
+USER_PWD = {
+    'user': 'password'
+}
 ################################################################################
 class SigninPage(QDialog):
     def __init__(self):
@@ -32,6 +35,8 @@ class SigninPage(QDialog):
         self.all_v_layout = QVBoxLayout()
 
         self.layout_init()
+        self.lineedit_init()
+        self.pushbutton_init()
 
     def layout_init(self):
         self.user_h_layout.addWidget(self.signin_user_label)
@@ -50,6 +55,34 @@ class SigninPage(QDialog):
 
         self.setLayout(self.all_v_layout)
 
+    def lineedit_init(self):
+        self.signin_user_line.textChanged.connect(self.check_input_func)
+        self.signin_pwd1_line.textChanged.connect(self.check_input_func)
+        self.signin_pwd2_line.textChanged.connect(self.check_input_func)
+
+    def check_input_func(self):
+        if self.signin_user_line.text() and self.signin_pwd1_line.text() and self.signin_pwd2_line.text():
+            self.signin_button.setEnabled(True)
+        else:
+            self.signin_button.setEnabled(False)
+
+
+    def pushbutton_init(self):
+        self.signin_button.setEnabled(False)
+        self.signin_button.clicked.connect(self.check_signin_func)
+
+    def check_signin_func(self):
+        if self.signin_pwd1_line.text() != self.signin_pwd2_line.text():
+            QMessageBox.critical(self, 'Wrong', 'Two Passwords Typed Are Not Same!')
+        elif self.signin_user_line.text() not in USER_PWD:
+            QMessageBox.information(self, 'Information', 'Register Successfully')
+            self.close()
+        else:
+            QMessageBox.critical(self, 'Wrong', 'This Username Has Been Registered!')
+        
+        self.signin_user_line.clear()
+        self.signin_pwd1_line.clear()
+        self.signin_pwd2_line.clear()
 
 ################################################################################
 class Demo(QWidget):
