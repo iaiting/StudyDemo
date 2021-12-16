@@ -73,6 +73,8 @@ class Demo(QWidget):
         else:
             QMessageBox.critical(self, 'Wrong', 'Wrong Username or Password')
 
+        self.user_line.clear()
+        self.pwd_line.clear()
 
 ################################################################################
 if __name__ == "__main__":
