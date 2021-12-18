@@ -30,7 +30,6 @@ class Demo(QWidget):
 
 
 
-
     def layout_init(self):
         self.all_v_layout.addLayout(self.pic_h_layout)
         self.all_v_layout.addLayout(self.button_h_layout)
