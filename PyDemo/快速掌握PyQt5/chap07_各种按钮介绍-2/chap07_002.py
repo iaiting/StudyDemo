@@ -17,6 +17,7 @@ class Demo(QWidget):
         super().__init__()
         self.tool_button = QToolButton(self)
         self.tool_button.setIcon(QIcon('./image/win.png'))
+        self.tool_button.setText('Test')
 
         self.tool_button.setCheckable(True)
         self.tool_button.toggled.connect(self.button_state_func)
