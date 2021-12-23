@@ -18,25 +18,56 @@ from PyQt5.QtCore import *
 #
 ################################################################################
 class CheckableDirModel(QDirModel):
-    pass
-    print(11111111)
+    print('**************t101: Enter CheckableDirModel')
     def __init__(self, parent=None):
         print("************************t101:")
         super().__init__(parent)
+        self.checks = {}
 
-
-    def flags(self, index):
-        print("************************t102:")
-        return super().flags(index)
+    # 如果有QTreeView的clicked事件则不需要重载该函数
     # def flags(self, index):
-    #     return super().flags(index)
+    #     return super().flags(index) | Qt.ItemIsUserCheckable
 
-    # def data(self, index, role):
-    #     return super().data(index, role=role)
+    #  -> typing.Any:
+    def data(self, index, role):
+        if role == Qt.CheckStateRole and index.column() == 0:
+            # print('\n\n**************t103: Enter data')
+            # print('**************t103.1: index = {}, role = {}'.format(index, role))
+            # print('**************t103.2: index.row = {}, index.col = {}, role = {}'.format(index.row(), index.column(), role))
+            return self.get_checks(index)
 
-    # def setData(self, index, value, role):
-    #     return super().setData(index, value, role=role)
+        ret_data = super().data(index, role=role)
+        return ret_data
 
+    def setData(self, index, value, role) -> bool:
+        if role == Qt.CheckStateRole:
+            print('\n\n**************t102: Enter setData')
+            print('**************t102.1: index = {}, value = {}, role = {}'.format(index,value, role))
+            self.checks[index] = value
+            self.recursiveCheck(index, value)
+            self.dataChanged.emit(index, index)
+
+        return super().setData(index, value, role=role)
+
+
+    def recursiveCheck(self, index, value):
+        if self.hasChildren(index):
+            childrenCount = self.rowCount(index)
+            for i in range(childrenCount):
+                child = self.index(i, 0, index)
+                print('***************x102:index = {}, child = {},value = {}, col = {}'.format(index, child, value, index.column()))
+                self.checks[child] = value
+                self.dataChanged.emit(child, child)
+        else:
+            print('该index是不是目录，没有子节点')
+
+
+    def get_checks(self, index):
+        return self.checks.get(index, Qt.Unchecked)
+
+
+
+################################################################################
 class Demo(QWidget):
     def __init__(self):
         super().__init__()
@@ -61,7 +92,50 @@ class Demo(QWidget):
         # 隐藏文件类型
         self.tree_view.setColumnHidden(2, True)
 
+        self.tree_view.clicked.connect(self.tree_view_func)
 
+    def tree_view_func(self):
+        print('执行: tree_view_func')
+        index = self.tree_view.currentIndex()
+        if self.dir_model.get_checks(index) == Qt.Unchecked:
+            self.dir_model.setData(index, Qt.Checked, Qt.CheckStateRole)
+            
+            self.get_files(index)
+            # if self.dir_model.isDir(index):
+            #     pass
+            # else:
+            #     file_name = self.dir_model.fileName(index)
+            #     file_path = self.dir_model.filePath(index)
+            #     file_info = 'File Name: {}\nFile Path: {}'.format(file_name, file_path)
+            #     print(file_info)
+        else:
+            self.dir_model.setData(index, Qt.Unchecked, Qt.CheckStateRole)
+
+
+    def get_files(self, index):
+        if self.dir_model.hasChildren(index):
+            childrenCount = self.dir_model.rowCount(index)
+            for i in range(childrenCount):
+                child = self.dir_model.index(i, 0, index)
+
+                if self.dir_model.isDir(child):
+                    pass
+                else:
+                    file_path = self.dir_model.filePath(child)
+                    file_info = 'File Path: {}'.format(file_path)
+                    print(file_info)
+        else:
+            file_path = self.dir_model.filePath(index)
+            file_info = 'File Path: {}'.format(file_path)
+            print(file_info)
+
+
+
+
+    # def setData(self, index, value, role) -> bool:
+    #     if role == Qt.CheckStateRole:        
+
+################################################################################
 def main():
     app = QApplication(sys.argv)
     demo = Demo()
