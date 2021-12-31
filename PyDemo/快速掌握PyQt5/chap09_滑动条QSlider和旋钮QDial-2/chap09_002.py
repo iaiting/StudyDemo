@@ -16,6 +16,7 @@ from PyQt5.QtWidgets import (
 class Demo(QWidget):
     def __init__(self) -> None:
         super().__init__()
+        self.setWindowTitle('QDial')
 
 ################################################################################
 if __name__ == "__main__":
