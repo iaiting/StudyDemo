@@ -21,6 +21,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = QWidget()
     widget.resize(200, 200)
+    widget.move(100, 100)
     widget.show()
 
     print('---------------- pos(), x(), y() ----------------')
