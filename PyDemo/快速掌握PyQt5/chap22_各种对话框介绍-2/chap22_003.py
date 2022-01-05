@@ -25,7 +25,8 @@ class Demo(QWidget):
         super().__init__()
 
         self.is_saved = True
-
+        self.is_saved_first = True
+        self.path = ''
 
         self.textedit = QTextEdit(self)
 
@@ -55,6 +56,27 @@ class Demo(QWidget):
 
     def save_file_func(self):
         print("save_file_func")
+        if self.is_saved_first:
+            self.save_as_func(self.textedit.toPlainText())
+        else:
+            self.save_func(self.textedit.toPlainText())
+
+    def save_func(self, text):
+        with open(self.path, 'w') as f:
+            f.write(text)
+
+        self.is_saved = True
+
+    def save_as_func(self, text):
+        self.path, _ = QFileDialog.getSaveFileName(self, 'Save File', './', 'Files (*.txt *.log)')
+        print(self.path)
+        if self.path:
+            with open(self.path, 'w') as f:
+                print(text)
+                f.write(text)
+
+            self.is_saved = True
+            self.is_saved_first = False
 
     def open_file_func(self):
         print('open_file_func')
@@ -69,6 +91,7 @@ class Demo(QWidget):
         if not self.is_saved:
             choice = QMessageBox.question(self, '', 'Do you want to save the text?', QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
             if choice == QMessageBox.Yes:
+                self.save_file_func()
                 QCloseEvent.accept()
             elif choice == QMessageBox.No:
                 QCloseEvent.accept()
