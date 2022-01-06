@@ -8,7 +8,7 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QHBoxLayout, QPushButton, QTextEdit, QVBoxLayout, QWidget
+    QApplication, QColorDialog, QFontDialog, QHBoxLayout, QPushButton, QTextEdit, QVBoxLayout, QWidget
 )
 
 ################################################################################
@@ -35,6 +35,16 @@ class Demo(QWidget):
 
     def open_dialog_func(self, btn):
         print('open_dialog_func: ', btn)
+        if btn == self.color_btn:
+            color = QColorDialog.getColor()
+            if color.isValid():
+                print('color: {}'.format(color))
+                self.textedit.setTextColor(color)
+        else:
+            font, ok = QFontDialog.getFont()
+            if ok:
+                print('font: {}'.format(font))
+                self.textedit.setFont(font)
 
 ################################################################################
 if __name__ == "__main__":
