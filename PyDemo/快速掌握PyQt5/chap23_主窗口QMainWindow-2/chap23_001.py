@@ -6,9 +6,10 @@
 #
 ################################################################################
 import sys
+from PyQt5.QtCore import QMimeData
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (
-    QAction, QMainWindow, QTextEdit, QWidget, QApplication
+    QAction, QColorDialog, QFontDialog, QMainWindow, QMessageBox, QTextEdit, QWidget, QApplication
 )
 
 ################################################################################
@@ -25,6 +26,8 @@ class Demo(QMainWindow):
         self.edit_toolbar = self.addToolBar('Edit')
 
         self.status_bar = self.statusBar()
+        self.mime_data = QMimeData()
+        self.clipboard = QApplication.clipboard()
 
         self.new_action = QAction('New', self)
         self.open_action = QAction('Open', self)
@@ -111,18 +114,28 @@ class Demo(QMainWindow):
         self.cut_action.triggered.connect(self.cut_func)
 
         self.copy_action.setShortcut('Ctrl+C')
+        self.copy_action.setToolTip('Copy the text')
+        self.copy_action.setStatusTip('Copy the text')
         self.copy_action.triggered.connect(self.copy_func)
 
         self.paste_action.setShortcut('Ctrl+P')
+        self.paste_action.setToolTip('Paste the text')
+        self.paste_action.setStatusTip('Paste the text')
         self.paste_action.triggered.connect(self.paste_func)
 
         self.font_action.setShortcut('Ctrl+T')
+        self.font_action.setToolTip('Change the font')
+        self.font_action.setStatusTip('Change the font')
         self.font_action.triggered.connect(self.font_func)
 
         self.color_action.setShortcut('Ctrl+R')
+        self.color_action.setToolTip('Change the color')
+        self.color_action.setStatusTip('Change the color')
         self.color_action.triggered.connect(self.color_func)
 
         self.about_action.setShortcut('Ctrl+Q')
+        self.about_action.setToolTip('What is Qt?')
+        self.about_action.setStatusTip('What is Qt')
         self.about_action.triggered.connect(self.about_func)
 
     def new_func(self):
@@ -142,6 +155,10 @@ class Demo(QMainWindow):
 
     def cut_func(self):
         print('cut_func')
+        self.mime_data.setHtml(self.textedit.textCursor().selection().toHtml())
+        self.clipboard.setMimeData(self.mime_data)
+        self.textedit.textCursor().removeSelectedText()
+
 
     def copy_func(self):
         print('copy_func')
@@ -151,12 +168,20 @@ class Demo(QMainWindow):
 
     def font_func(self):
         print('font_func')
+        font, ok = QFontDialog.getFont()
+        if ok:
+            self.textedit.setFont(font)
 
     def color_func(self):
         print('color_func')
+        color = QColorDialog.getColor()
+        if color.isValid():
+            self.textedit.setTextColor(color)
 
     def about_func(self):
         print('about_func')
+        QMessageBox.aboutQt(self, 'About Qt')
+
 
 ################################################################################
 if __name__ == "__main__":
