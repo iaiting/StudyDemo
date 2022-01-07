@@ -152,7 +152,19 @@ class Demo(QMainWindow):
 
     def new_func(self):
         print('new_func')
-        self.textedit.clear()
+        if self.is_saved:
+            self.textedit.clear()
+        else:
+            choice = QMessageBox.question(self, '', 'Do you want to save the text?', QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel)
+            if choice == QMessageBox.No:
+                self.textedit.clear()
+            elif choice == QMessageBox.Yes:
+                self.save_func(self.textedit.toHtml())
+                if self.is_saved_first == False:
+                    self.textedit.clear()
+            else:
+                pass
+
 
     def open_file_func(self):
         print('open_file_func')
@@ -167,7 +179,7 @@ class Demo(QMainWindow):
         print('save_func')
         if self.is_saved_first:
             self.save_as_func(text)
-            self.is_saved_first = False
+            
         else:
             with open(self.path, 'w') as f:
                 f.write(text)
@@ -178,6 +190,7 @@ class Demo(QMainWindow):
         if self.path:
             with open(self.path, 'w') as f:
                 f.write(text)
+                self.is_saved_first = False
 
 
     def close_func(self):
