@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     splash = QSplashScreen()
     # splash.resize(800, 800)
-    splash.setPixmap(QPixmap('python.jpg'))
+    splash.setPixmap(QPixmap('./python.jpg'))
     splash.show()
     splash.showMessage('welcome to Use This PyQt5-Made Notbook~',
                        Qt.AlignBottom|Qt.AlignCenter, Qt.blue)
