@@ -6,6 +6,7 @@
 #
 ################################################################################
 import sys
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (
     QAction, QMainWindow, QTextEdit, QWidget, QApplication
 )
@@ -39,8 +40,11 @@ class Demo(QMainWindow):
 
         self.textedit = QTextEdit(self)
         self.setCentralWidget(self.textedit)
+        
         self.menu_init()
         self.toolbar_init()
+        self.status_bar_init()
+        self.action_init()
 
     def menu_init(self):
         self.file_menu.addAction(self.new_action)
@@ -71,6 +75,19 @@ class Demo(QMainWindow):
         self.edit_toolbar.addAction(self.font_action)
         self.edit_toolbar.addAction(self.color_action)
 
+    def status_bar_init(self):
+        self.status_bar.showMessage('Ready to compose')
+
+    def action_init(self):
+        # self.new_action.setIcon(QIcon('../images/new.ico'))
+        self.new_action.setShortcut('Ctrl+N')
+        self.new_action.setToolTip('Create a new file')
+        self.new_action.setStatusTip('Create a new file')
+        self.new_action.triggered.connect(self.new_func)
+
+
+    def new_func(self):
+        print('new_func')
 ################################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
