@@ -85,9 +85,59 @@ class Demo(QMainWindow):
         self.new_action.setStatusTip('Create a new file')
         self.new_action.triggered.connect(self.new_func)
 
+        self.open_action.setShortcut('Ctrl+O')
+        self.open_action.setToolTip('Open an existing file')
+        self.open_action.setStatusTip('Open an existing file')
+        self.open_action.triggered.connect(self.open_file_func)
+
+        self.save_action.setShortcut('Ctrl+s')
+        self.save_action.triggered.connect(self.save_func)
+
+        self.save_as_action.setShortcut('Ctrl+A')
+        self.save_as_action.triggered.connect(self.save_as_func)
+
+        self.close_action.triggered.connect(self.close_func)
+
+        self.cut_action.triggered.connect(self.cut_func)
+
+        self.copy_action.triggered.connect(self.copy_func)
+
+        self.paste_action.triggered.connect(self.paste_func)
+
+        self.font_action.triggered.connect(self.font_func)
+
+        self.color_action.triggered.connect(self.color_func)
 
     def new_func(self):
         print('new_func')
+
+    def open_file_func(self):
+        print('open_file_func')
+
+    def save_func(self):
+        print('save_func')
+
+    def save_as_func(self):
+        print('save_as_func')
+
+    def close_func(self):
+        print('close_func')
+
+    def cut_func(self):
+        print('cut_func')
+
+    def copy_func(self):
+        print('copy_func')
+
+    def paste_func(self):
+        print('paste_func')
+
+    def font_func(self):
+        print('font_func')
+
+    def color_func(self):
+        print('color_func')
+
 ################################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
