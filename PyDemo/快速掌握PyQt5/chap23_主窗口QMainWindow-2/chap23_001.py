@@ -40,6 +40,7 @@ class Demo(QMainWindow):
         self.textedit = QTextEdit(self)
         self.setCentralWidget(self.textedit)
         self.menu_init()
+        self.toolbar_init()
 
     def menu_init(self):
         self.file_menu.addAction(self.new_action)
@@ -57,6 +58,19 @@ class Demo(QMainWindow):
         self.edit_menu.addAction(self.color_action)
 
         self.help_menu.addAction(self.about_action)
+
+    def toolbar_init(self):
+        self.file_toolbar.addAction(self.new_action)
+        self.file_toolbar.addAction(self.open_action)
+        self.file_toolbar.addAction(self.save_action)
+        self.file_toolbar.addAction(self.save_as_action)
+
+        self.edit_toolbar.addAction(self.cut_action)
+        self.edit_toolbar.addAction(self.copy_action)
+        self.edit_toolbar.addAction(self.paste_action)
+        self.edit_toolbar.addAction(self.font_action)
+        self.edit_toolbar.addAction(self.color_action)
+
 ################################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
