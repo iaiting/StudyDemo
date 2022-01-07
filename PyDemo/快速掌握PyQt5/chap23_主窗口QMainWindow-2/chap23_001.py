@@ -91,22 +91,39 @@ class Demo(QMainWindow):
         self.open_action.triggered.connect(self.open_file_func)
 
         self.save_action.setShortcut('Ctrl+s')
+        self.save_action.setToolTip('Save the file')
+        self.save_action.setStatusTip('Save the file')
         self.save_action.triggered.connect(self.save_func)
 
         self.save_as_action.setShortcut('Ctrl+A')
+        self.save_as_action.setToolTip('Save the file to a specified location')
+        self.save_as_action.setStatusTip('Save the file to a specified location')
         self.save_as_action.triggered.connect(self.save_as_func)
 
+        self.close_action.setShortcut('Ctrl+E')
+        self.close_action.setToolTip('Close the window')
+        self.close_action.setStatusTip('Close the window')
         self.close_action.triggered.connect(self.close_func)
 
+        self.cut_action.setShortcut('Ctrl+X')
+        self.cut_action.setToolTip('Cut the text to clipboard')
+        self.cut_action.setStatusTip('Cut the text')
         self.cut_action.triggered.connect(self.cut_func)
 
+        self.copy_action.setShortcut('Ctrl+C')
         self.copy_action.triggered.connect(self.copy_func)
 
+        self.paste_action.setShortcut('Ctrl+P')
         self.paste_action.triggered.connect(self.paste_func)
 
+        self.font_action.setShortcut('Ctrl+T')
         self.font_action.triggered.connect(self.font_func)
 
+        self.color_action.setShortcut('Ctrl+R')
         self.color_action.triggered.connect(self.color_func)
+
+        self.about_action.setShortcut('Ctrl+Q')
+        self.about_action.triggered.connect(self.about_func)
 
     def new_func(self):
         print('new_func')
@@ -137,6 +154,9 @@ class Demo(QMainWindow):
 
     def color_func(self):
         print('color_func')
+
+    def about_func(self):
+        print('about_func')
 
 ################################################################################
 if __name__ == "__main__":
