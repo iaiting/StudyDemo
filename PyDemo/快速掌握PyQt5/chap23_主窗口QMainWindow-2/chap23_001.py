@@ -9,7 +9,7 @@ import sys
 from PyQt5.QtCore import QMimeData
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (
-    QAction, QColorDialog, QFontDialog, QMainWindow, QMessageBox, QTextEdit, QWidget, QApplication
+    QAction, QColorDialog, QFileDialog, QFontDialog, QMainWindow, QMessageBox, QTextEdit, QWidget, QApplication
 )
 
 ################################################################################
@@ -17,6 +17,8 @@ class Demo(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.resize(450, 600)
+        self.is_saved_first = True
+        self.is_saved = True
 
         self.file_menu = self.menuBar().addMenu('File')
         self.edit_menu = self.menuBar().addMenu('Edit')
@@ -44,10 +46,14 @@ class Demo(QMainWindow):
         self.textedit = QTextEdit(self)
         self.setCentralWidget(self.textedit)
         
+        self.text_edit_init()
         self.menu_init()
         self.toolbar_init()
         self.status_bar_init()
         self.action_init()
+
+    def text_edit_init(self):
+        self.textedit.textChanged.connect(self.text_changed_func)
 
     def menu_init(self):
         self.file_menu.addAction(self.new_action)
@@ -96,12 +102,12 @@ class Demo(QMainWindow):
         self.save_action.setShortcut('Ctrl+s')
         self.save_action.setToolTip('Save the file')
         self.save_action.setStatusTip('Save the file')
-        self.save_action.triggered.connect(self.save_func)
+        self.save_action.triggered.connect(lambda: self.save_func(self.textedit.toHtml()))
 
         self.save_as_action.setShortcut('Ctrl+A')
         self.save_as_action.setToolTip('Save the file to a specified location')
         self.save_as_action.setStatusTip('Save the file to a specified location')
-        self.save_as_action.triggered.connect(self.save_as_func)
+        self.save_as_action.triggered.connect(lambda: self.save_as_func(self.textedit.toHtml()))
 
         self.close_action.setShortcut('Ctrl+E')
         self.close_action.setToolTip('Close the window')
@@ -138,20 +144,55 @@ class Demo(QMainWindow):
         self.about_action.setStatusTip('What is Qt')
         self.about_action.triggered.connect(self.about_func)
 
+    def text_changed_func(self):
+        if self.textedit.toPlainText():
+            self.is_saved = False
+        else:
+            self.is_saved = True
+
     def new_func(self):
         print('new_func')
+        self.textedit.clear()
 
     def open_file_func(self):
         print('open_file_func')
 
-    def save_func(self):
-        print('save_func')
+        file, _ = QFileDialog.getOpenFileName(self, 'Open File', './', 'Files (*.*)')
+        if file:
+            with open(file, 'r') as f:
+                self.textedit.clear()
+                self.textedit.setHtml(f.read())
 
-    def save_as_func(self):
+    def save_func(self, text):
+        print('save_func')
+        if self.is_saved_first:
+            self.save_as_func(text)
+            self.is_saved_first = False
+        else:
+            with open(self.path, 'w') as f:
+                f.write(text)
+
+    def save_as_func(self, text):
         print('save_as_func')
+        self.path, _ = QFileDialog.getSaveFileName(self, 'Save File', './', 'Files (*.html *.txt *.log)')
+        if self.path:
+            with open(self.path, 'w') as f:
+                f.write(text)
+
 
     def close_func(self):
         print('close_func')
+        if not self.is_saved:
+            choice = QMessageBox.question(self, 'Save File', 'Do you want to save the text?', QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
+            if choice == QMessageBox.Yes:
+                self.save_func(self.textedit.toHtml())
+                self.close()
+            elif choice == QMessageBox.No:
+                self.close()
+            else:
+                pass
+        else:
+            self.close()
 
     def cut_func(self):
         print('cut_func')
@@ -162,9 +203,12 @@ class Demo(QMainWindow):
 
     def copy_func(self):
         print('copy_func')
+        self.mime_data.setHtml(self.textedit.textCursor().selection().toHtml())
+        self.clipboard.setMimeData(self.mime_data)
 
     def paste_func(self):
         print('paste_func')
+        self.textedit.insertHtml(self.clipboard.mimeData().html())
 
     def font_func(self):
         print('font_func')
