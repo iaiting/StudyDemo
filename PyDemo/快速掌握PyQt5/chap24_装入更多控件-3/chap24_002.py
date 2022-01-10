@@ -58,7 +58,6 @@ class Demo(QTabWidget):
 
     def tab2_init(self):
         print('tab2_init')
-    
 
 
 
