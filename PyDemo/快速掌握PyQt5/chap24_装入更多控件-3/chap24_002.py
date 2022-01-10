@@ -10,7 +10,7 @@
 import sys
 from PyQt5.QtCore import qWarning
 from PyQt5.QtWidgets import (
-    QComboBox, QDateEdit, QGridLayout, QLabel, QLineEdit, QTabWidget, QTableView, QWidget, QApplication
+    QComboBox, QDateEdit, QGridLayout, QLabel, QLineEdit, QTabWidget, QTableView, QTextEdit, QWidget, QApplication
 )
 from PyQt5.QtGui import (
     QIcon
@@ -23,7 +23,7 @@ class Demo(QTabWidget):
 
         self.tab1 = QWidget()
         self.tab2 = QWidget()
-        self.tab3 = QWidget()
+        self.tab3 = QTextEdit()
 
         self.addTab(self.tab1, 'Basice Info')
         self.addTab(self.tab2, 'Contact Info')
@@ -42,6 +42,9 @@ class Demo(QTabWidget):
 
         gender_label = QLabel('Gender:', self.tab1)
         gender_combox = QComboBox()
+
+        items = ['Please choose your gender', 'Female', 'Male']
+        gender_combox.addItems(items)
 
         bd_label = QLabel('Birth Date')
         bd_dateedit = QDateEdit()
