@@ -28,10 +28,20 @@ class Demo(QSplitter):
         self.tree_view.setModel(self.dir_model)
         self.table_view.setModel(self.dir_model)
 
+        self.tree_view.doubleClicked.connect(self.show_func)
+
         self.addWidget(self.list_view)
         self.addWidget(self.tree_view)
         self.addWidget(self.table_view)
 
+        self.setSizes([300, 600, 600])
+        print(self.count())
+
+
+    def show_func(self, index):
+        print('show_func', index)
+        self.list_view.setRootIndex(index)
+        self.table_view.setRootIndex(index)
 
 ################################################################################
 if __name__ == "__main__":
