@@ -9,11 +9,29 @@
 import sys
 
 from PyQt5.QtWidgets import (
-    QWidget, QApplication
+    QDirModel, QListView, QTabBar, QTableView, QTreeView, QWidget, QApplication, QSplitter
 )
 
-class Demo(QWidget):
-    pass
+################################################################################
+class Demo(QSplitter):
+    def __init__(self):
+        super().__init__()
+        
+        self.dir_model = QDirModel(self)
+
+        self.list_view = QListView()
+        self.tree_view = QTreeView()
+        self.table_view = QTableView()
+
+
+        self.list_view.setModel(self.dir_model)
+        self.tree_view.setModel(self.dir_model)
+        self.table_view.setModel(self.dir_model)
+
+        self.addWidget(self.list_view)
+        self.addWidget(self.tree_view)
+        self.addWidget(self.table_view)
+
 
 ################################################################################
 if __name__ == "__main__":
