@@ -8,13 +8,25 @@
 ################################################################################
 
 import sys
+from PyQt5.QtCore import qWarning
 from PyQt5.QtWidgets import (
-    QWidget, QApplication
+    QTabWidget, QTableView, QWidget, QApplication
 )
 
-class Demo(QWidget):
+################################################################################
+class Demo(QTabWidget):
     def __init__(self) -> None:
         super().__init__()
+
+        self.tab1 = QWidget()
+        self.tab2 = QWidget()
+        self.tab3 = QWidget()
+
+        self.addTab(self.tab1, 'Basice Info')
+        self.addTab(self.tab2, 'Contact Info')
+        self.addTab(self.tab3, 'More Info')
+
+
 
 ################################################################################
 if __name__ == "__main__":
