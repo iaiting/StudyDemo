@@ -58,7 +58,24 @@ class Demo(QTabWidget):
 
     def tab2_init(self):
         print('tab2_init')
+        tel_label = QLabel('Tel:')
+        tel_line = QLineEdit()
 
+        mobile_label = QLabel('Mobile:')
+        mobile_line = QLineEdit()
+
+        add_label = QLabel('Address:')
+        add_line = QLineEdit()
+
+        grid_layout = QGridLayout()
+        self.tab2.setLayout(grid_layout)
+
+        grid_layout.addWidget(tel_label, 0, 0, 1, 1)
+        grid_layout.addWidget(tel_line, 0, 1, 1, 1)
+        grid_layout.addWidget(mobile_label, 1, 0, 1, 1)
+        grid_layout.addWidget(mobile_line, 1, 1, 1, 1)
+        grid_layout.addWidget(add_label, 2, 0, 1, 1)
+        grid_layout.addWidget(add_line, 2, 1, 1, 1)
 
 
 ################################################################################
