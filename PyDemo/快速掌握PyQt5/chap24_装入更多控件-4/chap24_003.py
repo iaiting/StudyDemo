@@ -12,7 +12,8 @@ import sys
 from PyQt5.QtWidgets import (
     QWidget, QApplication, QTextEdit, 
     QStackedWidget, QHBoxLayout, QListWidget, 
-    QLabel, QLineEdit, QComboBox, QGridLayout
+    QLabel, QLineEdit, QComboBox, QGridLayout, 
+    QDateEdit,
 )
 
 ################################################################################
@@ -50,8 +51,11 @@ class Demo(QWidget):
 
         gender_label = QLabel('Gender:', self.stack1)
         gender_combox = QComboBox(self.stack1)
+        items = ['Please choose your gender', 'Female', 'Male']
+        gender_combox.addItems(items)
 
-        # bd_label = QLabel('Birth Date:', self.stack1)
+        bd_label = QLabel('Birth Date:')
+        bd_dateedit = QDateEdit()
 
         g_layout = QGridLayout()
         self.stack1.setLayout(g_layout)
@@ -60,7 +64,8 @@ class Demo(QWidget):
         g_layout.addWidget(name_line, 0, 1, 1, 1)
         g_layout.addWidget(gender_label, 1, 0, 1, 1)
         g_layout.addWidget(gender_combox, 1, 1, 1, 1)
-
+        g_layout.addWidget(bd_label, 2, 0, 1, 1)
+        g_layout.addWidget(bd_dateedit, 2, 1, 1, 1)
 
     def stack2_init(self):
         tel_label = QLabel('Tel:')
