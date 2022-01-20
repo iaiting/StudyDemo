@@ -34,6 +34,7 @@ class Demo(QWidget):
         self.list_widget.addItem('Basic Info')
         self.list_widget.addItem('Contact Info')
         self.list_widget.addItem('More Info')
+        self.list_widget.clicked.connect(self.change_func)
 
         self.h_layout = QHBoxLayout()
         self.h_layout.addWidget(self.list_widget)
@@ -45,6 +46,10 @@ class Demo(QWidget):
 
     def stack2_init(self):
         pass
+
+    def change_func(self):
+        print('change_func')
+        self.stacked_widget.setCurrentIndex(self.list_widget.currentIndex().row())
 
 ################################################################################
 if __name__ == "__main__":
