@@ -90,8 +90,6 @@ class Demo(QWidget):
         g_layout.addWidget(add_label, 2, 0, 1, 1)
         g_layout.addWidget(add_line, 2, 1, 1, 1)
 
-
-
     def change_func(self):
         print('change_func')
         self.stacked_widget.setCurrentIndex(self.list_widget.currentIndex().row())
