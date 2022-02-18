@@ -30,6 +30,7 @@ class Demo(QWidget):
         self.stacked_widget.addWidget(self.stack1)
         self.stacked_widget.addWidget(self.stack2)
         self.stacked_widget.addWidget(self.stack3)
+        self.stacked_widget.currentChanged.connect(lambda:print(self.stacked_widget.currentIndex()))
 
         self.list_widget = QListWidget()
         self.list_widget.addItem('Basic Info')
