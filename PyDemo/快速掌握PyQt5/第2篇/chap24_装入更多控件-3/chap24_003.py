@@ -11,7 +11,8 @@ from unicodedata import name
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QListWidget, 
     QHBoxLayout,
-    QTextEdit, QLabel, QStackedWidget
+    QTextEdit, QLabel, QStackedWidget, QLineEdit, 
+    QGridLayout,
 )
 
 ################################################################################
@@ -30,6 +31,7 @@ class Demo(QWidget):
         self.stacked_widget.addWidget(self.stack1)
         self.stacked_widget.addWidget(self.stack2)
         self.stacked_widget.addWidget(self.stack3)
+        self.stacked_widget.currentChanged.connect(lambda: print(self.stacked_widget.currentIndex()))
 
         self.list_widget = QListWidget()
         self.list_widget.addItem('Basic Info')
@@ -44,7 +46,18 @@ class Demo(QWidget):
 
     def stack1_init(self):
         print('stack1_init')
+
         name_label = QLabel('Name:', self.stack1)
+        name_line = QLineEdit(self.stack1)
+
+        gender_label = QLabel('Gender:',self.stack1)
+
+        g_layout = QGridLayout()
+        self.stack1.setLayout(g_layout)
+        g_layout.addWidget(name_label, 0, 0, 1, 1)
+        g_layout.addWidget(name_line, 0, 1, 1, 1)
+
+        g_layout.addWidget(gender_label, 1, 0, 1, 1)
 
     def stack2_init(self):
         print('stack2_init')
