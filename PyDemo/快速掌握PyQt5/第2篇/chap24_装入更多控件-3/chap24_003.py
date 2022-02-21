@@ -6,6 +6,7 @@
 # 24.3 堆叠窗口QStackedWidget
 #
 ################################################################################
+from sunau import AUDIO_FILE_ENCODING_LINEAR_16
 import sys
 from unicodedata import name
 from PyQt5.QtWidgets import (
@@ -72,7 +73,26 @@ class Demo(QWidget):
 
     def stack2_init(self):
         print('stack2_init')
-        name_label = QLabel('Name2:', self.stack2)
+        tel_label = QLabel('Tel:', self.stack2)
+        tel_line = QLineEdit()
+
+        mobile_label = QLabel('Mobile:', self.stack2)
+        mobile_line = QLineEdit()
+
+        add_label = QLabel('Address:', self.stack2)
+        add_line = QLineEdit()
+
+        g_layout = QGridLayout()
+        self.stack2.setLayout(g_layout)
+
+        g_layout.addWidget(tel_label, 0, 0, 1, 1)
+        g_layout.addWidget(tel_line, 0, 1, 1, 1)
+
+        g_layout.addWidget(mobile_label, 1, 0, 1, 1)
+        g_layout.addWidget(mobile_line, 1, 1, 1, 1)
+
+        g_layout.addWidget(add_label, 2, 0, 1, 1)
+        g_layout.addWidget(add_line, 2, 1, 1, 1)
 
 
     def change_func(self):
