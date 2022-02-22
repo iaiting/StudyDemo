@@ -21,7 +21,12 @@ class Demo(QWidget):
         self.label.setAlignment(Qt.AlignCenter)
 
         self.button = QPushButton('Start', self)
+        self.button.clicked.connect(self.start_count_func)
+
         self.button_2 = QPushButton('Stop', self)
+        self.button_2.clicked.connect(self.stop_count_func)
+
+        self.my_thread = MyThread()
 
         self.v_layout = QVBoxLayout()
         self.setLayout(self.v_layout)
@@ -32,7 +37,32 @@ class Demo(QWidget):
         
         self.v_layout.addWidget(self.label)
         self.v_layout.addLayout(self.h_layout)
-        
+
+    def start_count_func(self):
+        print('start_count_func')
+        self.my_thread.is_on = True
+        self.my_thread.start()
+
+    def stop_count_func(self):
+        print('stop_count_func')
+        self.my_thread.is_on = False
+        self.my_thread.count = 0
+
+class MyThread(QThread):
+    my_signal = pyqtSignal(str)
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.count = 0
+        self.is_on = True
+
+    def run(self):
+        print('run')
+        while self.is_on:
+            print(self.count)
+            self.count += 1
+            self.sleep(1)
+
 
 ################################################################################
 if __name__ == "__main__":
