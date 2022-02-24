@@ -19,7 +19,7 @@ class Demo(QWidget):
         super().__init__()
         self.button1 = QPushButton('button1')
         self.button2 = QPushButton('button2')
-        
+        self.button2.setProperty('name', 'btn')
 
         self.lineedit1 = QLineEdit()
         self.lineedit2 = SubLineEdit()
@@ -27,6 +27,7 @@ class Demo(QWidget):
         self.combox = QComboBox()
         my_list = ['A', 'B', 'C', 'D']
         self.combox.addItems(my_list)
+        self.combox.setObjectName('cb')
 
         self.gb = QGroupBox()
         self.label1 = QLabel('label1')
@@ -59,5 +60,15 @@ class SubLineEdit(QLineEdit):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     demo = Demo()
+    qss = '''
+        * {color: red}
+        QPushButton {background-color: blue}
+        QPushButton[name='btn'] {background-color: green}
+        .QLineEdit {font: bold 20px}
+        QComboBox#cb {color: blue}
+        QGroupBox QLabel {color: blue}
+        QGroupBox > QLabel {font: 30px}
+    '''
+    demo.setStyleSheet(qss)
     demo.show()
     sys.exit(app.exec_())
