@@ -10,7 +10,10 @@ import sys
 from PyQt5.QtWidgets import QApplication, QSpinBox
 
 class Demo(QSpinBox):
-    pass
+    def __init__(self) -> None:
+        super().__init__()
+        self.setMinimum(0)
+        self.setMaximum(100)
 
 ################################################################################
 if __name__ == "__main__":
