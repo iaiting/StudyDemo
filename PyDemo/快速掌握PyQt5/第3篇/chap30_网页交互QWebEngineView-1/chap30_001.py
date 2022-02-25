@@ -25,8 +25,8 @@ class Demo(QWidget):
         self.forward_btn = QPushButton('前进')
         self.refresh_btn = QPushButton('刷新')
         self.url_line = QLineEdit()
-        self.zoom_in_btn = QPushButton('缩小')
-        self.zoom_out_btn = QPushButton('放大')
+        self.zoom_in_btn = QPushButton('放大')
+        self.zoom_out_btn = QPushButton('缩小')
 
         self.browser = QWebEngineView()
 
@@ -62,8 +62,13 @@ class Demo(QWidget):
         self.browser.load(QUrl('https://baidu.com'))
         self.browser.urlChanged.connect(lambda: self.url_line.setText(self.browser.url().toDisplayString()))
 
-    def btn_init(selfs):
-        pass
+    def btn_init(self):
+        self.back_btn.clicked.connect(self.browser.back)
+        self.forward_btn.clicked.connect(self.browser.forward)
+        self.refresh_btn.clicked.connect(self.browser.reload)
+
+        self.zoom_in_btn.clicked.connect(self.zoom_in_func)
+        self.zoom_out_btn.clicked.connect(self.zoom_out_func)
 
     def line_init(self):
         self.url_line.setFixedWidth(400)
@@ -76,6 +81,13 @@ class Demo(QWidget):
                     self.browser.load(QUrl(self.url_line.text()))
                 else:
                     self.browser.load(QUrl('https://' + self.url_line.text()))
+
+    def zoom_in_func(self):
+        self.browser.setZoomFactor(self.browser.zoomFactor() + 0.1)
+
+    def zoom_out_func(self):
+        self.browser.setZoomFactor(self.browser.zoomFactor() - 0.1)
+
 
 ################################################################################
 if __name__ == "__main__":
