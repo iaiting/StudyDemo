@@ -60,6 +60,7 @@ class Demo(QWidget):
 
     def browser_init(self):
         self.browser.load(QUrl('https://baidu.com'))
+        self.browser.urlChanged.connect(lambda: self.url_line.setText(self.browser.url().toDisplayString()))
 
     def btn_init(selfs):
         pass
@@ -70,10 +71,11 @@ class Demo(QWidget):
 
     def keyPressEvent(self, QKeyEvent) -> None:
         if QKeyEvent.key() == Qt.Key_Return or QKeyEvent.key() == Qt.Key_Enter:
-            if self.url_line.text().startswith('https://') or self.url_line.text().startswith('http://'):
-                self.browser.load(QUrl(self.url_line.text()))
-            else:
-                self.browser.load(QUrl('https://' + self.url_line.text()))
+            if self.url_line.hasFocus():
+                if self.url_line.text().startswith('https://') or self.url_line.text().startswith('http://'):
+                    self.browser.load(QUrl(self.url_line.text()))
+                else:
+                    self.browser.load(QUrl('https://' + self.url_line.text()))
 
 ################################################################################
 if __name__ == "__main__":
