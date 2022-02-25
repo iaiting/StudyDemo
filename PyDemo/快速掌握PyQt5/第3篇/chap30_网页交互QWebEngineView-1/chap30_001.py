@@ -6,8 +6,9 @@
 # 30.1 制作简单浏览器
 #
 ################################################################################
+
 import sys
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, Qt
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, 
     QLineEdit,
@@ -67,6 +68,12 @@ class Demo(QWidget):
         self.url_line.setFixedWidth(400)
         self.url_line.setPlaceholderText('Search or enter website name')
 
+    def keyPressEvent(self, QKeyEvent) -> None:
+        if QKeyEvent.key() == Qt.Key_Return or QKeyEvent.key() == Qt.Key_Enter:
+            if self.url_line.text().startswith('https://') or self.url_line.text().startswith('http://'):
+                self.browser.load(QUrl(self.url_line.text()))
+            else:
+                self.browser.load(QUrl('https://' + self.url_line.text()))
 
 ################################################################################
 if __name__ == "__main__":
