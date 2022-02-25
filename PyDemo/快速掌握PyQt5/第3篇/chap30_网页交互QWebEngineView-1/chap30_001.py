@@ -8,9 +8,10 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QPushButton,
+    QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, 
+    QLineEdit,
 )
-
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 ################################################################################
 class Demo(QWidget):
@@ -24,6 +25,21 @@ class Demo(QWidget):
 
         self.zoom_in_btn = QPushButton()
         self.zoom_out_btn = QPushButton()
+
+        self.url_line = QLineEdit()
+
+        self.h_layout = QHBoxLayout()
+        self.v_layout = QVBoxLayout()
+
+        self.layout_init()
+        self.line_init()
+
+    def layout_init(self):
+        self.setLayout(self.v_layout)
+        self.v_layout.addWidget(self.url_line)
+
+    def line_init(self):
+        self.url_line.setFixedWidth(400)
 
 
 ################################################################################
