@@ -22,11 +22,11 @@ class Demo(QWidget):
         self.back_btn = QPushButton()
         self.forward_btn = QPushButton()
         self.refresh_btn = QPushButton()
-
         self.zoom_in_btn = QPushButton()
         self.zoom_out_btn = QPushButton()
-
         self.url_line = QLineEdit()
+
+        self.browser = QWebEngineView()
 
         self.h_layout = QHBoxLayout()
         self.v_layout = QVBoxLayout()
@@ -36,7 +36,10 @@ class Demo(QWidget):
 
     def layout_init(self):
         self.setLayout(self.v_layout)
-        self.v_layout.addWidget(self.url_line)
+
+        self.h_layout.addWidget(self.url_line)
+        self.v_layout.addLayout(self.h_layout)
+        self.v_layout.addWidget(self.browser)
 
     def line_init(self):
         self.url_line.setFixedWidth(400)
