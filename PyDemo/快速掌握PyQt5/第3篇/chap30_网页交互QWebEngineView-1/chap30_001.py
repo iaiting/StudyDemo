@@ -7,6 +7,7 @@
 #
 ################################################################################
 import sys
+from PyQt5.QtCore import QUrl
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, 
     QLineEdit,
@@ -22,9 +23,9 @@ class Demo(QWidget):
         self.back_btn = QPushButton('后退')
         self.forward_btn = QPushButton('前进')
         self.refresh_btn = QPushButton('刷新')
+        self.url_line = QLineEdit()
         self.zoom_in_btn = QPushButton('缩小')
         self.zoom_out_btn = QPushButton('放大')
-        self.url_line = QLineEdit()
 
         self.browser = QWebEngineView()
 
@@ -34,6 +35,7 @@ class Demo(QWidget):
         self.layout_init()
         self.btn_init()
         self.line_init()
+        self.browser_init()
 
     def layout_init(self):
         self.setLayout(self.v_layout)
@@ -54,6 +56,9 @@ class Demo(QWidget):
 
         self.v_layout.addLayout(self.h_layout)
         self.v_layout.addWidget(self.browser)
+
+    def browser_init(self):
+        self.browser.load(QUrl('https://baidu.com'))
 
     def btn_init(selfs):
         pass
