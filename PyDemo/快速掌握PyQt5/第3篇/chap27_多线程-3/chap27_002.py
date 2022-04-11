@@ -12,6 +12,8 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt, QThread, pyqtSignal
 
+
+################################################################################
 class MyThread(QThread):
     my_signal = pyqtSignal(str)
 
@@ -27,6 +29,7 @@ class MyThread(QThread):
 
             self.count += 1
 
+################################################################################
 class Demo(QWidget):
     def __init__(self) -> None:
         super().__init__()
