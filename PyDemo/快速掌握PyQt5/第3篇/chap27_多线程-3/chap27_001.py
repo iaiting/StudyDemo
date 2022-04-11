@@ -7,6 +7,20 @@
 #
 ################################################################################
 import sys
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QPushButton
+)
 
+
+################################################################################
+class Demo(QWidget):
+    def __init__(self) -> None:
+        super().__init__()
+
+
+################################################################################
 if __name__ == "__main__":
-    print('main')
+    app = QApplication(sys.argv)
+    demo = Demo()
+    demo.show()
+    sys.exit(app.exec_())
