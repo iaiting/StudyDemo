@@ -3,10 +3,11 @@
 
 ################################################################################
 #
-# 27.1 QThread类
+# 非多线程，ui（app.exec_()）线程界面卡顿
 #
 ################################################################################
 import sys
+import time
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QPushButton, QLabel, QVBoxLayout
 )
@@ -34,6 +35,11 @@ class Demo(QWidget):
 
     def count_func(self):
         print('Enter count_func:')
+        while True:
+            self.count += 1
+            print(self.count)
+            self.label.setText(str(self.count))
+            time.sleep(1)
 
 ################################################################################
 if __name__ == "__main__":
