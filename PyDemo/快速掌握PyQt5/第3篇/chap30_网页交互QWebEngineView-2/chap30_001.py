@@ -62,7 +62,17 @@ class Demo(QWidget):
     def le_init(self):
         self.url_le.setFixedWidth(400)
         self.url_le.setPlaceholderText('Search or enter website name')
-        pass
+
+    def keyPressEvent(self, QKeyEvent) -> None:
+        print(Qt.Key_Enter,':1')
+        print(Qt.Key_Return, ':2')
+
+        print(QKeyEvent.key())
+        if QKeyEvent.key() == Qt.Key_Return or QKeyEvent.key() == Qt.Key_Enter:
+            if self.url_le.text().startswith('htt://') or self.url_le.text().startswith('https://'):
+                self.browser.load(QUrl(self.url_le.text()))
+            else:
+                self.browser.load(QUrl('https://' + self.url_le.text()))
 
 
 ################################################################################
