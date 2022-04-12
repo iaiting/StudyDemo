@@ -23,14 +23,27 @@ class Demo(QWidget):
         super().__init__()
 
         self.label = QLabel('Read to do')
+        self.label.setAlignment(Qt.AlignCenter)
+
         self.button = QPushButton('Start')
+        self.button.clicked.connect(self.start_func)
+
+        self.crawl_thread = CrawThread()
+        self.crawl_thread.status_signal.connect(self.status_func)
 
         self.v_layout = QVBoxLayout()
         self.setLayout(self.v_layout)
 
         self.v_layout.addWidget(self.label)
+        self.v_layout.addWidget(self.button)
 
 
+    def start_func(self):
+        print('start_func')
+        self.crawl_thread.start()
+
+    def status_func(self,status):
+        self.label.setText(status)
 ################################################################################
 class CrawThread(QThread):
     status_signal = pyqtSignal(str)
@@ -44,8 +57,9 @@ class CrawThread(QThread):
         response = urllib.request.urlopen('https://www.python.org')
         
         self.status_signal.emit('Saving')
-        with open('python.txt', 'w') as f:
-            f.write(response.read().decode('utf-8'))
+        # print(response.read().decode('utf-8'))
+        with open('./python.txt', 'wb') as f:
+            f.write(response.read())
 
         self.status_signal.emit('Done')
 
