@@ -22,6 +22,7 @@ class Demo(QWidget):
         self.label_list = []
         for i in range(5):
             label = QLabel(str(i+1))
+            label.setAlignment(Qt.AlignCenter)
             self.label_list.append(label)
 
         self.add_btn = QPushButton('增加文本')
@@ -33,7 +34,7 @@ class Demo(QWidget):
 
         for l in self.label_list:
             self.v_layout.addWidget(l)
-            
+
         h_layout.addWidget(self.add_btn)
         h_layout.addWidget(self.minus_btn)
 
