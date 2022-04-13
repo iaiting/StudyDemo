@@ -17,7 +17,6 @@ class Demo(QWidget):
     def __init__(self) -> None:
         super().__init__()
         # self.resize(100, 100)
-        # self.center()
         self.center()
 
     def center(self):
