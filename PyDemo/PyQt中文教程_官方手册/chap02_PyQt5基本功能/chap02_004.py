@@ -10,6 +10,7 @@ import sys
 from PyQt5.QtWidgets import (
     QWidget, QPushButton, QApplication
 )
+from PyQt5.QtCore import QCoreApplication
 
 ################################################################################
 class Example(QWidget):
@@ -20,6 +21,7 @@ class Example(QWidget):
 
     def initUI(self):
         qbtn = QPushButton('Quit', self)
+        qbtn.clicked.connect(QCoreApplication.instance().quit)
         qbtn.resize(qbtn.sizeHint())
         qbtn.move(50, 50)
 
