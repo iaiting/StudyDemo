@@ -1,7 +1,13 @@
 import sys
 from PyQt5.QtWidgets import (
-    QMainWindow, QMenu, QAction, QApplication
+    QMainWindow, QMenu, QAction, QApplication, QMenu,
 )
+
+################################################################################
+#
+# 子菜单
+#
+################################################################################
 
 ################################################################################
 class Example(QMainWindow):
@@ -10,7 +16,11 @@ class Example(QMainWindow):
         self.initUI()
 
     def initUI(self):
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('File')
+
         self.show()
+
 
 
 ################################################################################
