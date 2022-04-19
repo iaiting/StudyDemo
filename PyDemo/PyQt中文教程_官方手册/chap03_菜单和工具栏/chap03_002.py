@@ -21,11 +21,18 @@ class Example(QMainWindow):
 
     def initUI(self):
         exitAct = QAction('Exit', self)
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.setStatusTip('Exit application')
         exitAct.triggered.connect(qApp.quit)
+
+        self.statusBar()
 
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(exitAct)
+
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Simple menu')
 
         self.show()
 
