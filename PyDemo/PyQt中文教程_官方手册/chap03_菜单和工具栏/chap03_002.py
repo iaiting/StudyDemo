@@ -8,7 +8,8 @@
 ################################################################################
 import sys
 from PyQt5.QtWidgets import (
-    QMainWindow, QApplication
+    QMainWindow, QApplication, qApp,
+    QAction,
 )
 
 from PyQt5.QtGui import QIcon
@@ -19,6 +20,13 @@ class Example(QMainWindow):
         self.initUI()
 
     def initUI(self):
+        exitAct = QAction('Exit', self)
+        exitAct.triggered.connect(qApp.quit)
+
+        menubar = self.menuBar()
+        fileMenu = menubar.addMenu('&File')
+        fileMenu.addAction(exitAct)
+
         self.show()
 
 
