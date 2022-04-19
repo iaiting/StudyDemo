@@ -1,13 +1,13 @@
-import sys
-from PyQt5.QtWidgets import (
-    QMainWindow, QMenu, QAction, QApplication, QMenu,
-)
-
 ################################################################################
 #
 # 子菜单
 #
 ################################################################################
+import sys
+from PyQt5.QtWidgets import (
+    QMainWindow, QMenu, QAction, QApplication, QMenu,
+)
+
 
 ################################################################################
 class Example(QMainWindow):
@@ -19,9 +19,18 @@ class Example(QMainWindow):
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('File')
 
+        impMenu = QMenu('Import', self)
+        impAct = QAction('Import mail', self)
+        impMenu.addAction(impAct)
+
+
+        newAct = QAction('new', self)
+        fileMenu.addAction(newAct)
+        fileMenu.addMenu(impMenu)
+
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Submenu')
         self.show()
-
-
 
 ################################################################################
 if __name__ == "__main__":
