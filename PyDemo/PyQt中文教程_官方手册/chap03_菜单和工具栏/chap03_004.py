@@ -19,6 +19,9 @@ class Example(QMainWindow):
         self.initUI()
 
     def initUI(self):
+
+        self.setGeometry(300, 300, 300, 200)
+        self.setWindowTitle('Check menu')
         self.show()
 
 ################################################################################
