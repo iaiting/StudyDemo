@@ -38,6 +38,16 @@ class Demo(QWidget):
         self.browser.append(text)
         self.browser.moveCursor(QTextCursor.End)
 
+def main_test():
+    print("**********")
+    print("**********")
+    print("**********")
+    print("**********")
+    print("**********")
+    print("**********")
+    print("**********")
+
+
 ################################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
