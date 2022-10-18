@@ -20,7 +20,6 @@ url = [
 define("port", default = 8000, help = "run on the given port", type = int)
 
 def main():
-    print("**********t101:")
     tornado.options.parse_command_line()
 
     settings = dict(
