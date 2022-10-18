@@ -9,12 +9,9 @@ import tornado.web
 from tornado.options import define, options
 import signal
 
+from handlers.index import IndexHandler
 
 
-class IndexHandler(tornado.web.RequestHandler):
-    def get(self):
-        greeting = self.get_argument('greeting', 'Hello')
-        self.write(greeting + ', welcome you to read: www.itdiffer.com\r\n')
 url = [
     (r"/", IndexHandler),
 ]
@@ -41,7 +38,13 @@ def main():
     print("Development server is running at http://127.0.0.1:%s" % options.port)
     print("Quit the server with Control-C")
 
-    tornado.ioloop.IOLoop.instance().start()
+
+    instance = tornado.ioloop.IOLoop.instance()
+
+    # tornado.autoreload.start(instance)
+
+    instance.start()
+
 
 
 
