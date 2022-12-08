@@ -1,0 +1,12 @@
+1、C结构体与 JSON 快速互转库
+https://gitee.com/Armink/struct2json
+
+
+2、简单日志库
+https://github.com/rxi/log.c
+
+3、apue学习
+https://github.com/MeiK2333/apue.git
+
+4、c语言库
+https://github.com/happyfish100/libfastcommon
