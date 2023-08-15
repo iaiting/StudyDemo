@@ -10,3 +10,6 @@ https://github.com/MeiK2333/apue.git
 
 4、c语言库
 https://github.com/happyfish100/libfastcommon
+
+5、qt学习
+http://c.biancheng.net/view/1792.html

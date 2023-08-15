@@ -64,7 +64,10 @@ class Demo(QWidget):
 
     def open_func(self):
         print('open_func')
-        file, _ = QFileDialog.getOpenFileName(self, 'Open File', './', "All Files (*);; Text Files (*.txt *.log)")
+        import os
+        # file, _ = QFileDialog.getOpenFileName(self, 'Open File', './', "All Files (*);; Text Files (*.txt *.log)")
+        file, _ = QFileDialog.getExistingDirectory(None, 'aaa', os.getcwd())#选择文件目录
+
         print(file)
         if file:
             with open(file, 'r', encoding='utf-8') as f:

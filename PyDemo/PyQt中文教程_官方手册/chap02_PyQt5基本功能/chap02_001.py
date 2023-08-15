@@ -6,12 +6,13 @@
 # 简单的例子
 #
 ################################################################################
-from ctypes import resize
+# from ctypes import resize
 import sys
 from PyQt5.QtWidgets import (
     QApplication, QWidget,
 )
 
+# from PySide2.QtWidgets import QApplication, QWidget
 
 ################################################################################
 if __name__ == "__main__":
