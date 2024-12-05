@@ -9,6 +9,8 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
 
+
+################################################################################
 class Demo(QWidget):
     def __init__(self):
         super(Demo, self).__init__()
