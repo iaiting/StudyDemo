@@ -19,6 +19,10 @@ class Demo(QWidget):
 
     def change_text(self):
         print("change_text")
+        if self.button.text() == 'Start':
+            self.button.setText('Stop')
+        else:
+            self.button.setText('Start')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
